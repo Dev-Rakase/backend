@@ -6,6 +6,7 @@ import * as Joi from '@hapi/joi';
 import appConfig from './config/app.config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 import mikroOrmConfig from './mikro-orm.config';
 
 @Module({
@@ -24,6 +25,7 @@ import mikroOrmConfig from './mikro-orm.config';
     }),
     MikroOrmModule.forRoot({ ...mikroOrmConfig, autoLoadEntities: true }),
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
