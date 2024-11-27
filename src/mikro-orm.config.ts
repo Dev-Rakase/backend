@@ -10,8 +10,8 @@ export default defineConfig({
   user: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   port: parseInt(process.env.DATABASE_NAME, 10) || 5432,
-  // entities: ['dist/**/*.entity.js'],
-  // entitiesTs: ['src/**/*.entity.ts'],
+  entities: ['dist/**/*.entity.js'],
+  entitiesTs: ['src/**/*.entity.ts'],
 
   migrations: {
     path: 'dist/migrations',

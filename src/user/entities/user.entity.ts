@@ -2,7 +2,7 @@ import { Entity, PrimaryKey, Property, t } from '@mikro-orm/core';
 
 @Entity({ tableName: 'users' })
 export class User {
-  @PrimaryKey({ type: 'uuid' })
+  @PrimaryKey({ type: 'bigint' })
   id: string;
 
   @Property()
@@ -14,8 +14,8 @@ export class User {
   @Property({ hidden: true })
   password: string;
 
-  @Property({ type: t.text })
-  bio: string;
+  @Property({ type: t.text, nullable: true })
+  bio?: string;
 
   @Property()
   createdAt: Date = new Date();
