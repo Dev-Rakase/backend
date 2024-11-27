@@ -10,3 +10,18 @@ services:
 
     environment:
       POSTGRES_PASSWORD: db_password
+
+  backend:
+    build: .
+    depends_on:
+      - database
+
+    volumes:
+      - './:/app'
+      - '/app/node_modules'
+
+    ports:
+      - '3000:3000'
+
+    env_file:
+      - .env
