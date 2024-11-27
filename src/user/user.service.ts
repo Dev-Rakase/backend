@@ -29,8 +29,8 @@ export class UserService {
     try {
       const hashPassword = await bcrypt.hash(payload.password, 12);
 
-      const user = this.em.create(User, { ...payload, password: hashPassword });
       // save in database
+      const user = this.em.create(User, { ...payload, password: hashPassword });
 
       // save in firebase auth service, can use firebase (cloud function  or event ) to insert also or server as subscriber
       await this.fb.registerUser({
@@ -46,5 +46,17 @@ export class UserService {
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  async findOne(id: string) {
+    const user = await this.userRepository.findOne({ id });
+    return user;
+  }
+
+  async updateUserBio(id: string, bio: string) {
+    const user = await this.em.findOne(User, { id });
+    user.bio = bio;
+    await this.em.persistAndFlush(user);
+    return user;
   }
 }
